@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPK Pemilihan Toko Pashmina Terbaik - Nur Annisa Chania</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fefce8;
+            --primary: #fde047;
+            --secondary: #6366f1;
+            --accent: #ec4899;
+            --text: #000000;
+            --border-width: 3px;
+            --shadow: 6px 6px 0px #000000;
+            --shadow-sm: 3px 3px 0px #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 2rem 1rem;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Neobrutalism Components */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border: var(--border-width) solid var(--text);
+            box-shadow: var(--shadow);
+            border-radius: 20px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .card {
+            background: white;
+            border: var(--border-width) solid var(--text);
+            box-shadow: var(--shadow);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background: var(--primary);
+            padding: 0.2rem 1rem;
+            border: var(--border-width) solid var(--text);
+            transform: rotate(-1deg);
+            margin-bottom: 2rem;
+        }
+
+        select, input, button {
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: var(--border-width) solid var(--text);
+            border-radius: 10px;
+            background: white;
+            outline: none;
+        }
+
+        button {
+            background: var(--primary);
+            cursor: pointer;
+            transition: all 0.1s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--text);
+        }
+
+        button:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: var(--border-width) solid var(--text);
+            border-radius: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 1rem;
+            border: 2px solid var(--text);
+            text-align: left;
+        }
+
+        th {
+            background: var(--primary);
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .badge {
+            padding: 0.3rem 0.8rem;
+            border: 2px solid var(--text);
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .badge-benefit { background: #86efac; }
+        .badge-cost { background: #fda4af; }
+
+        /* Calculation Steps */
+        .calc-step {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border: 2px solid var(--text);
+            border-radius: 12px;
+        }
+
+        .calc-title {
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Ranking List */
+        .rank-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border: 2px solid var(--text);
+            border-radius: 12px;
+            background: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .rank-item.top {
+            background: var(--primary);
+        }
+
+        .rank-number {
+            width: 35px;
+            height: 35px;
+            background: var(--text);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .info-box {
+            background: #dbeafe;
+            border: 2px solid var(--text);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: var(--border-width) solid var(--text);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistem Pendukung Keputusan</h1>
+            <p style="font-weight: 600; color: var(--secondary);">Pemilihan Toko Pashmina Shopee Terbaik</p>
+        </header>
+
+        <div class="card">
+            <h2 class="section-title">Konfigurasi Data</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <select id="dataMode" onchange="handleModeChange()">
+                    <option value="shopee">Gunakan 20 Data Shopee</option>
+                    <option value="manual">Input Manual</option>
+                </select>
+                <button onclick="calculateAll()">ANALISIS SEKARANG</button>
+            </div>
+            <div id="inputArea" style="margin-top: 1.5rem;"></div>
+        </div>
+
+        <div id="resultsArea" style="display: none;">
+            <div class="card">
+                <h2 class="section-title">1. Kriteria & Bobot</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>Kode</th><th>Kriteria</th><th>Bobot</th><th>Tipe</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>C1</td><td>Rating Toko</td><td>0.30</td><td><span class="badge badge-benefit">Benefit</span></td></tr>
+                            <tr><td>C2</td><td>Kualitas (1-100)</td><td>0.25</td><td><span class="badge badge-benefit">Benefit</span></td></tr>
+                            <tr><td>C3</td><td>Harga (Cost)</td><td>0.25</td><td><span class="badge badge-cost">Cost</span></td></tr>
+                            <tr><td>C4</td><td>Penjualan</td><td>0.20</td><td><span class="badge badge-benefit">Benefit</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="section-title">2. Data Alternatif (Input)</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Toko</th>
+                                <th>Rating (C1)</th>
+                                <th>Kualitas (C2)</th>
+                                <th>Harga (C3)</th>
+                                <th>Penjualan (C4)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alternativesBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="section-title">3. Detail Perhitungan</h2>
+                
+                <!-- SAW CALC -->
+                <div class="calc-step">
+                    <h3 class="calc-title"><i data-lucide="calculator"></i> Langkah SAW (Simple Additive Weighting)</h3>
+                    <p>Rumus Normalisasi: <i>Rij = xij / max(xj)</i> (Benefit) atau <i>min(xj) / xij</i> (Cost)</p>
+                    <div id="sawSteps" class="table-wrapper"></div>
+                </div>
+
+                <!-- WP CALC -->
+                <div class="calc-step">
+                    <h3 class="calc-title"><i data-lucide="calculator"></i> Langkah WP (Weighted Product)</h3>
+                    <p>Rumus: <i>Si = Π (xij ^ wj)</i>. Bobot cost menjadi negatif.</p>
+                    <div id="wpSteps" class="table-wrapper"></div>
+                </div>
+
+                <!-- SMART CALC -->
+                <div class="calc-step">
+                    <h3 class="calc-title"><i data-lucide="calculator"></i> Langkah SMART (Simple Multi-Attribute Rating Technique)</h3>
+
+                    <p>Rumus Utility: <i>u(ai) = (Cout - Cmin) / (Cmax - Cmin)</i>. SMART mengukur posisi relatif terhadap range data.</p>
+                    <div id="smartSteps" class="table-wrapper"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="section-title">4. Hasil Akhir & Ranking</h2>
+                <div class="grid-3">
+                    <div>
+                        <h3 style="margin-bottom: 1rem; font-weight: 800;">🏆 Ranking SAW</h3>
+                        <div id="sawFinal" class="rank-list"></div>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 1rem; font-weight: 800;">🏆 Ranking WP</h3>
+                        <div id="wpFinal" class="rank-list"></div>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 1rem; font-weight: 800;">🏆 Ranking SMART</h3>
+                        <div id="smartFinal" class="rank-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="section-title">5. Perbandingan Visual</h2>
+                <div style="height: 500px;">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3 style="font-weight: 800; margin-bottom: 0.5rem;"><i data-lucide="help-circle"></i> Mengapa Hasil SMART Berbeda?</h3>
+                <p>Hasil SMART bisa berbeda dari SAW dan WP karena cara normalisasinya. <b>SAW</b> menormalkan data terhadap nilai maksimal (linear), sedangkan <b>SMART</b> menormalkan data berdasarkan <b>rentang (range)</b> antara nilai minimal dan maksimal.</p>
+                <p style="margin-top: 0.5rem;">Jika selisih antara nilai terendah dan tertinggi sangat jauh, SMART akan memberikan skor 0 untuk nilai terendah dan 1 untuk nilai tertinggi, sehingga hasilnya lebih "kontras" dibandingkan SAW.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Dibuat oleh <b>Nur Annisa Chania</b></p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Sistem Pendukung Keputusan Multi-Kriteria (MADM)</p>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const criteriaWeights = [0.30, 0.25, 0.25, 0.20];
+        const criteriaTypes = ['benefit', 'benefit', 'cost', 'benefit'];
+        let chartInstance = null;
+
+        const shopeeData = [
+            { name: "by.nvilda", values: [4.9, 95, 45000, 15000] },
+            { name: "Kaniya", values: [4.8, 88, 35000, 12000] },
+            { name: "WMD Fashion", values: [4.7, 85, 28000, 20000] },
+            { name: "Orbelle Store", values: [4.8, 92, 55000, 8000] },
+            { name: "Lungguh Hijab", values: [4.8, 82, 32000, 10000] },
+            { name: "Lozy Hijab", values: [4.9, 98, 75000, 18000] },
+            { name: "nadiraa_hijab", values: [4.8, 86, 30000, 25000] },
+            { name: "Rifany Hijab", values: [4.7, 84, 25000, 50000] },
+            { name: "Demar Hijab", values: [4.8, 90, 42000, 11000] },
+            { name: "Tiebymin", values: [4.9, 94, 65000, 9000] },
+            { name: "Hijaberies", values: [4.7, 83, 29000, 14000] },
+            { name: "Zoya", values: [4.8, 89, 85000, 7000] },
+            { name: "Mydailyhijab", values: [4.6, 80, 48000, 5000] },
+            { name: "Buttonscarves", values: [4.9, 99, 395000, 3000] },
+            { name: "Vanilla Hijab", values: [4.9, 96, 95000, 12000] },
+            { name: "Kami Idea", values: [4.8, 93, 225000, 2000] },
+            { name: "Ria Miranda", values: [4.9, 95, 275000, 1500] },
+            { name: "Heaven Light", values: [4.8, 91, 55000, 16000] },
+            { name: "Geulis", values: [4.7, 88, 75000, 6000] },
+            { name: "Dauky", values: [4.8, 87, 65000, 8500] }
+        ];
+
+        function handleModeChange() {
+            const mode = document.getElementById('dataMode').value;
+            const inputArea = document.getElementById('inputArea');
+            if (mode === 'shopee') {
+                inputArea.innerHTML = `<p style="font-weight: 700; color: #059669;">✅ 20 Data Shopee Siap!</p>`;
+            } else {
+                inputArea.innerHTML = `<p>Gunakan form input (untuk demo, silakan gunakan mode Shopee untuk hasil 20 data lengkap).</p>`;
+            }
+        }
+
+        function calculateAll() {
+            const alternatives = JSON.parse(JSON.stringify(shopeeData));
+            document.getElementById('resultsArea').style.display = 'block';
+
+            // Render Alternatives Table
+            const body = document.getElementById('alternativesBody');
+            body.innerHTML = alternatives.map(alt => `
+                <tr>
+                    <td style="font-weight: 700;">${alt.name}</td>
+                    <td>${alt.values[0]}</td>
+                    <td>${alt.values[1]}</td>
+                    <td>Rp ${alt.values[2].toLocaleString()}</td>
+                    <td>${alt.values[3].toLocaleString()}</td>
+                </tr>
+            `).join('');
+
+            const matrix = alternatives.map(a => a.values);
+            const numCrit = matrix[0].length;
+            const maxVals = [];
+            const minVals = [];
+            for(let j=0; j<numCrit; j++) {
+                const col = matrix.map(row => row[j]);
+                maxVals[j] = Math.max(...col);
+                minVals[j] = Math.min(...col);
+            }
+
+            // SAW CALC
+            const sawNorm = alternatives.map(alt => {
+                const rowNorm = alt.values.map((v, j) => criteriaTypes[j] === 'benefit' ? v / maxVals[j] : minVals[j] / v);
+                const score = rowNorm.reduce((sum, v, j) => sum + (v * criteriaWeights[j]), 0);
+                return { name: alt.name, norm: rowNorm, score };
+            });
+
+            // WP CALC
+            const wpS = alternatives.map(alt => {
+                const s = alt.values.reduce((prod, v, j) => prod * Math.pow(v, criteriaTypes[j] === 'benefit' ? criteriaWeights[j] : -criteriaWeights[j]), 1);
+                return { name: alt.name, s };
+            });
+            const sumS = wpS.reduce((sum, item) => sum + item.s, 0);
+            const wpScores = wpS.map(item => ({ name: item.name, s: item.s, score: item.s / sumS }));
+
+            // SMART CALC
+            const smartScores = alternatives.map(alt => {
+                const utils = alt.values.map((v, j) => {
+                    const range = maxVals[j] - minVals[j];
+                    if (range === 0) return 1;
+                    return criteriaTypes[j] === 'benefit' ? (v - minVals[j]) / range : (maxVals[j] - v) / range;
+                });
+                const score = utils.reduce((sum, u, j) => sum + (u * criteriaWeights[j]), 0);
+                return { name: alt.name, utils, score };
+            });
+
+            // RENDER STEPS
+            renderTableStep('sawSteps', ['Toko', 'R1', 'R2', 'R3', 'R4', 'Skor'], sawNorm, 'norm');
+            renderTableStep('wpSteps', ['Toko', 'Nilai S (Vektor)', 'Nilai V (Skor)'], wpScores, 's');
+            renderTableStep('smartSteps', ['Toko', 'U1', 'U2', 'U3', 'U4', 'Skor'], smartScores, 'utils');
+
+            // RENDER FINAL
+            renderRanking('sawFinal', [...sawNorm].sort((a,b) => b.score - a.score));
+            renderRanking('wpFinal', [...wpScores].sort((a,b) => b.score - a.score));
+            renderRanking('smartFinal', [...smartScores].sort((a,b) => b.score - a.score));
+
+            // CHART
+            renderChart(sawNorm, wpScores, smartScores);
+            
+            window.scrollTo({ top: document.getElementById('resultsArea').offsetTop - 50, behavior: 'smooth' });
+        }
+
+        function renderTableStep(id, headers, data, key) {
+            let html = `<table><thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>`;
+            data.forEach(item => {
+                html += `<tr><td>${item.name}</td>`;
+                if (key === 's') {
+                    html += `<td>${item.s.toFixed(4)}</td><td>${item.score.toFixed(4)}</td>`;
+                } else {
+                    item[key].forEach(v => html += `<td>${v.toFixed(3)}</td>`);
+                    html += `<td style="font-weight:800;">${item.score.toFixed(4)}</td>`;
+                }
+                html += `</tr>`;
+            });
+            html += `</tbody></table>`;
+            document.getElementById(id).innerHTML = html;
+        }
+
+        function renderRanking(id, sortedData) {
+            document.getElementById(id).innerHTML = sortedData.map((item, i) => `
+                <div class="rank-item ${i === 0 ? 'top' : ''}">
+                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                        <div class="rank-number">${i+1}</div>
+                        <span style="font-weight: 700;">${item.name}</span>
+                    </div>
+                    <span style="font-weight: 800;">${item.score.toFixed(4)}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderChart(saw, wp, smart) {
+            const ctx = document.getElementById('comparisonChart');
+            if (chartInstance) chartInstance.destroy();
+            
+            const labels = shopeeData.map(d => d.name);
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'SAW', data: labels.map(n => saw.find(x => x.name === n).score), backgroundColor: '#fde047', borderColor: '#000', borderWidth: 2 },
+                        { label: 'WP', data: labels.map(n => wp.find(x => x.name === n).score), backgroundColor: '#6366f1', borderColor: '#000', borderWidth: 2 },
+                        { label: 'SMART', data: labels.map(n => smart.find(x => x.name === n).score), backgroundColor: '#ec4899', borderColor: '#000', borderWidth: 2 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, border: { color: '#000', width: 3 } }, x: { border: { color: '#000', width: 3 } } },
+                    plugins: { legend: { labels: { font: { weight: 'bold', size: 14 } } } }
+                }
+            });
+        }
+
+        handleModeChange();
+    </script>
+</body>
+</html>
