@@ -1,250 +1,282 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SPK Pemilihan Toko Pashmina Terbaik</title>
+<title>SPK Pemilihan Toko Pashmina</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-    <style>
+<style>
 
-        :root{
-            --bg:#fefce8;
-            --primary:#fde047;
-            --secondary:#6366f1;
-            --accent:#ec4899;
-            --text:#000;
-            --border:3px;
-            --shadow:6px 6px 0 #000;
-        }
+:root{
+    --bg:#fefce8;
+    --primary:#fde047;
+    --secondary:#6366f1;
+    --accent:#ec4899;
+    --text:#000;
+    --shadow:6px 6px 0 #000;
+}
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Space Grotesk',sans-serif;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Space Grotesk',sans-serif;
+}
 
-        body{
-            background:var(--bg);
-            color:var(--text);
-            padding:2rem;
-        }
+body{
+    background:var(--bg);
+    color:var(--text);
+    padding:2rem;
+}
 
-        .container{
-            max-width:1200px;
-            margin:auto;
-        }
+.container{
+    max-width:1300px;
+    margin:auto;
+}
 
-        .card{
-            background:#fff;
-            border:var(--border) solid #000;
-            border-radius:16px;
-            padding:2rem;
-            margin-bottom:2rem;
-            box-shadow:var(--shadow);
-        }
+.card{
+    background:#fff;
+    border:3px solid #000;
+    border-radius:18px;
+    padding:2rem;
+    margin-bottom:2rem;
+    box-shadow:var(--shadow);
+}
 
-        h1{
-            font-size:3rem;
-            font-weight:800;
-            margin-bottom:1rem;
-        }
+h1{
+    font-size:3rem;
+    font-weight:800;
+    margin-bottom:.5rem;
+}
 
-        .section-title{
-            background:var(--primary);
-            display:inline-block;
-            padding:.5rem 1rem;
-            border:3px solid #000;
-            margin-bottom:1.5rem;
-            font-size:1.5rem;
-            font-weight:800;
-        }
+.section-title{
+    display:inline-block;
+    background:var(--primary);
+    border:3px solid #000;
+    padding:.5rem 1rem;
+    font-size:1.5rem;
+    font-weight:800;
+    margin-bottom:1.5rem;
+}
 
-        button{
-            padding:1rem 1.5rem;
-            background:var(--primary);
-            border:3px solid #000;
-            border-radius:10px;
-            font-weight:700;
-            cursor:pointer;
-            box-shadow:4px 4px 0 #000;
-        }
+button{
+    padding:1rem 1.5rem;
+    background:var(--primary);
+    border:3px solid #000;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:4px 4px 0 #000;
+}
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-            margin-top:1rem;
-        }
+button:hover{
+    transform:translate(-2px,-2px);
+}
 
-        th,td{
-            border:2px solid #000;
-            padding:1rem;
-            text-align:center;
-        }
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+}
 
-        th{
-            background:var(--primary);
-        }
+th,td{
+    border:2px solid #000;
+    padding:1rem;
+    text-align:center;
+}
 
-        .rank-item{
-            display:flex;
-            justify-content:space-between;
-            padding:1rem;
-            border:2px solid #000;
-            margin-bottom:.8rem;
-            border-radius:10px;
-            background:#fff;
-        }
+th{
+    background:var(--primary);
+}
 
-        .top{
-            background:var(--primary);
-        }
+.rank-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1rem;
+    margin-bottom:1rem;
+    border:2px solid #000;
+    border-radius:12px;
+    background:#fff;
+}
 
-        .info-box{
-            margin-top:1rem;
-            background:#dbeafe;
-            border:2px solid #000;
-            padding:1rem;
-            border-radius:10px;
-        }
+.top{
+    background:var(--primary);
+}
 
-        .grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-            gap:2rem;
-        }
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:2rem;
+}
 
-        canvas{
-            background:#fff;
-            border:3px solid #000;
-            padding:1rem;
-            border-radius:16px;
-        }
+.info-box{
+    margin-top:1rem;
+    padding:1rem;
+    border:2px solid #000;
+    border-radius:12px;
+    background:#dbeafe;
+}
 
-    </style>
+canvas{
+    background:#fff;
+    border:3px solid #000;
+    border-radius:16px;
+    padding:1rem;
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <div class="card">
-        <h1>SPK Pemilihan Toko Pashmina</h1>
-        <p>Menggunakan Metode AHP, SAW, WP, dan SMART</p>
-    </div>
+<div class="card">
+
+    <h1>SPK Pemilihan Toko Pashmina</h1>
+
+    <p>
+        Metode AHP, SAW, WP, dan SMART
+    </p>
+
+</div>
+
+<div class="card">
+
+    <h2 class="section-title">
+        Jalankan Sistem
+    </h2>
+
+    <button onclick="calculateAll()">
+        ANALISIS SEKARANG
+    </button>
+
+</div>
+
+<div id="results" style="display:none;">
+
+    <!-- AHP -->
 
     <div class="card">
 
-        <h2 class="section-title">Mulai Analisis</h2>
+        <h2 class="section-title">
+            AHP - Bobot Kriteria
+        </h2>
 
-        <button onclick="calculateAll()">
-            ANALISIS SEKARANG
-        </button>
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Kriteria</th>
+                    <th>C1</th>
+                    <th>C2</th>
+                    <th>C3</th>
+                    <th>C4</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="ahpBody"></tbody>
+
+        </table>
+
+        <div id="ahpResult"></div>
 
     </div>
 
-    <div id="results" style="display:none;">
+    <!-- DATA -->
 
-        <!-- AHP -->
+    <div class="card">
 
-        <div class="card">
+        <h2 class="section-title">
+            Data Alternatif
+        </h2>
 
-            <h2 class="section-title">
-                AHP - Bobot Kriteria
-            </h2>
+        <table>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Kriteria</th>
-                        <th>C1</th>
-                        <th>C2</th>
-                        <th>C3</th>
-                        <th>C4</th>
-                    </tr>
-                </thead>
+            <thead>
 
-                <tbody id="ahpBody"></tbody>
-            </table>
+                <tr>
+                    <th>Nama Toko</th>
+                    <th>Rating</th>
+                    <th>Kualitas</th>
+                    <th>Harga</th>
+                    <th>Penjualan</th>
+                </tr>
 
-            <div id="ahpResult"></div>
+            </thead>
 
-        </div>
+            <tbody id="altBody"></tbody>
 
-        <!-- DATA -->
+        </table>
 
-        <div class="card">
+    </div>
 
-            <h2 class="section-title">
-                Data Alternatif
-            </h2>
+    <!-- RANKING -->
 
-            <table>
+    <div class="card">
 
-                <thead>
-                    <tr>
-                        <th>Nama Toko</th>
-                        <th>Rating</th>
-                        <th>Kualitas</th>
-                        <th>Harga</th>
-                        <th>Penjualan</th>
-                    </tr>
-                </thead>
+        <h2 class="section-title">
+            Ranking Hasil
+        </h2>
 
-                <tbody id="altBody"></tbody>
+        <div class="grid">
 
-            </table>
+            <div>
 
-        </div>
+                <h3 style="margin-bottom:1rem;">
+                    🏆 SAW
+                </h3>
 
-        <!-- RANKING -->
+                <div id="sawRank"></div>
 
-        <div class="card">
+            </div>
 
-            <h2 class="section-title">
-                Ranking Hasil
-            </h2>
+            <div>
 
-            <div class="grid">
+                <h3 style="margin-bottom:1rem;">
+                    🏆 WP
+                </h3>
 
-                <div>
-                    <h3>🏆 SAW</h3>
-                    <div id="sawRank"></div>
-                </div>
+                <div id="wpRank"></div>
 
-                <div>
-                    <h3>🏆 WP</h3>
-                    <div id="wpRank"></div>
-                </div>
+            </div>
 
-                <div>
-                    <h3>🏆 SMART</h3>
-                    <div id="smartRank"></div>
-                </div>
+            <div>
+
+                <h3 style="margin-bottom:1rem;">
+                    🏆 SMART
+                </h3>
+
+                <div id="smartRank"></div>
 
             </div>
 
         </div>
 
-        <!-- CHART -->
+    </div>
 
-        <div class="card">
+    <!-- CHART -->
 
-            <h2 class="section-title">
-                Grafik Perbandingan
-            </h2>
+    <div class="card">
 
-            <canvas id="chart"></canvas>
+        <h2 class="section-title">
+            Grafik Perbandingan
+        </h2>
 
-        </div>
+        <canvas id="chart"></canvas>
 
     </div>
+
+</div>
 
 </div>
 
@@ -263,14 +295,26 @@ const criteriaTypes = [
 
 const shopeeData = [
 
-    { name:"by.nvilda", values:[4.9,95,45000,15000] },
-    { name:"Kaniya", values:[4.8,88,35000,12000] },
-    { name:"WMD Fashion", values:[4.7,85,28000,20000] },
-    { name:"Orbelle Store", values:[4.8,92,55000,8000] },
-    { name:"Lozy Hijab", values:[4.9,98,75000,18000] },
-    { name:"Rifany Hijab", values:[4.7,84,25000,50000] },
-    { name:"Demar Hijab", values:[4.8,90,42000,11000] },
-    { name:"Tiebymin", values:[4.9,94,65000,9000] }
+    { name: "by.nvilda", values: [4.9, 95, 45000, 15000] },
+    { name: "Kaniya", values: [4.8, 88, 35000, 12000] },
+    { name: "WMD Fashion", values: [4.7, 85, 28000, 20000] },
+    { name: "Orbelle Store", values: [4.8, 92, 55000, 8000] },
+    { name: "Lungguh Hijab", values: [4.8, 82, 32000, 10000] },
+    { name: "Lozy Hijab", values: [4.9, 98, 75000, 18000] },
+    { name: "nadiraa_hijab", values: [4.8, 86, 30000, 25000] },
+    { name: "Rifany Hijab", values: [4.7, 84, 25000, 50000] },
+    { name: "Demar Hijab", values: [4.8, 90, 42000, 11000] },
+    { name: "Tiebymin", values: [4.9, 94, 65000, 9000] },
+    { name: "Hijaberies", values: [4.7, 83, 29000, 14000] },
+    { name: "Zoya", values: [4.8, 89, 85000, 7000] },
+    { name: "Mydailyhijab", values: [4.6, 80, 48000, 5000] },
+    { name: "Buttonscarves", values: [4.9, 99, 395000, 3000] },
+    { name: "Vanilla Hijab", values: [4.9, 96, 95000, 12000] },
+    { name: "Kami Idea", values: [4.8, 93, 225000, 2000] },
+    { name: "Ria Miranda", values: [4.9, 95, 275000, 1500] },
+    { name: "Heaven Light", values: [4.8, 91, 55000, 16000] },
+    { name: "Geulis", values: [4.7, 88, 75000, 6000] },
+    { name: "Dauky", values: [4.8, 87, 65000, 8500] }
 
 ];
 
@@ -299,7 +343,7 @@ function calculateAHP(){
 
         `).join('');
 
-    let n = matrix.length;
+    const n = matrix.length;
 
     let colSum = [];
 
@@ -385,7 +429,9 @@ function calculateAHP(){
 
         <div class="info-box">
 
-            <h3>Bobot Prioritas</h3>
+            <h3 style="margin-bottom:1rem;">
+                Bobot Prioritas
+            </h3>
 
             <p><b>C1 Rating</b> = ${weights[0].toFixed(3)}</p>
             <p><b>C2 Kualitas</b> = ${weights[1].toFixed(3)}</p>
@@ -396,8 +442,12 @@ function calculateAHP(){
 
             <p><b>Consistency Ratio</b> = ${CR.toFixed(3)}</p>
 
-            <p style="font-weight:bold; color:${CR < 0.1 ? 'green':'red'};">
-                ${CR < 0.1 ? 'Konsisten':'Tidak Konsisten'}
+            <p style="
+                color:${CR < 0.1 ? 'green' : 'red'};
+                font-weight:bold;
+                margin-top:1rem;
+            ">
+                ${CR < 0.1 ? 'Konsisten' : 'Tidak Konsisten'}
             </p>
 
         </div>
@@ -423,8 +473,8 @@ function calculateAll(){
                 <td>${a.name}</td>
                 <td>${a.values[0]}</td>
                 <td>${a.values[1]}</td>
-                <td>${a.values[2]}</td>
-                <td>${a.values[3]}</td>
+                <td>Rp ${a.values[2].toLocaleString()}</td>
+                <td>${a.values[3].toLocaleString()}</td>
 
             </tr>
 
@@ -481,7 +531,7 @@ function calculateAll(){
 
                 v,
 
-                criteriaTypes[j]=='benefit'
+                criteriaTypes[j] == 'benefit'
                 ? criteriaWeights[j]
                 : -criteriaWeights[j]
 
@@ -501,8 +551,10 @@ function calculateAll(){
     const totalS = wpTemp.reduce((s,v)=>s+v.s,0);
 
     const wp = wpTemp.map(v=>({
+
         name:v.name,
         score:v.s / totalS
+
     }));
 
     // SMART
@@ -556,7 +608,7 @@ function renderRanking(id,data){
 
         sorted.map((v,i)=>`
 
-            <div class="rank-item ${i==0?'top':''}">
+            <div class="rank-item ${i==0 ? 'top' : ''}">
 
                 <span>
                     ${i+1}. ${v.name}
@@ -616,7 +668,13 @@ function renderChart(saw,wp,smart){
 
         options:{
 
-            responsive:true
+            responsive:true,
+
+            scales:{
+                y:{
+                    beginAtZero:true
+                }
+            }
 
         }
 
